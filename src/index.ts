@@ -1,17 +1,13 @@
-require('dotenv').config();
-
-import express from "express";
+import App from './api/app';
 import config from './config/default';
-import connect from './utils/connect';
+import ProductController from './api/controller/product.controller';
 
-const port : number = config.port;
-const url : string = config.url;
-
-const app = express();
-
-app.use(express.json());
-
-app.listen(port, async () => {    
-    console.info( `server started at ${url}:${port}`);
-    await connect();
-});
+const app = new App(
+    [
+      new ProductController(),
+    ],
+    config.port,
+    config.url
+  );
+   
+  app.listen();
