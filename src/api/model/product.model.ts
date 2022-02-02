@@ -1,11 +1,16 @@
 import mongoose from 'mongoose';
+import Product from '../types/product.interface';
 
-export interface ProductDocument extends mongoose.Document {
+interface ProductDocument extends mongoose.Document {
     imageUrl: string,
     name: string,
     price: number,
     brand: string,
     stock: number
+}
+
+interface ProductModelInterface extends mongoose.Model<ProductDocument> {
+    build(attrs: Product): ProductDocument;
 }
 
 const productSchema = new mongoose.Schema(
@@ -18,6 +23,10 @@ const productSchema = new mongoose.Schema(
     },{timestamps: true}
 )
 
-const ProductModel = mongoose.model("Product", productSchema);
+productSchema.statics.build = (prod:Product) =>{
+    return new Product(prod);
+}
 
-export default ProductModel;
+const Product = mongoose.model<ProductDocument, ProductModelInterface>("Product", productSchema);
+
+export default Product;

@@ -10,12 +10,12 @@ class ProductController{
     }
     
     getProducts = async (response: express.Response) => {
-        const products = await this.service.getProducts(response)
+        const products = await this.service.getProducts()
         return response.send(products).status(200);
     }
      
     createProduct = async (request: express.Request, response: express.Response) => {
-        const products = await this.service.createProduct(request, response);
+        const products = await this.service.createProduct(request);
         return response.send(products).status(200);
     }
 

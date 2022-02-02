@@ -4,6 +4,6 @@ interface Product {
     price: number;
     brand: string;
     stock: number;
-  }
+}
    
-  export default Product;
+export default Product;
