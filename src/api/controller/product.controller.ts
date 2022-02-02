@@ -19,8 +19,15 @@ class ProductController{
         return response.send(products).status(200);
     }
 
-    public getPath():string {
-        return this.path;
+    public getRouter():Router{
+        this.router.get(this.path, (req, res) =>
+            this.getProducts(res)
+        );
+        this.router.post(this.path, (req, res) =>
+            this.createProduct(req, res)
+        );
+
+        return this.router;
     }
 }
 

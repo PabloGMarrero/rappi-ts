@@ -8,11 +8,6 @@ export default (app:Express) => {
         return res.sendStatus(200);
     });
 
-    app.get(productController.getPath(), (req, res) =>
-        productController.getProducts(res)
-    );
-    app.post(productController.getPath(), (req, res) =>
-        productController.createProduct(req, res)
-    );
+    app.use(productController.getRouter())
 
 };
